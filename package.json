@@ -1,0 +1,15 @@
+{
+  "name": "met-office",
+  "version": "1.0.0",
+  "description": "met office api app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "got": "^11.8.2",
+    "readline-sync": "^1.4.10"
+  }
+}
