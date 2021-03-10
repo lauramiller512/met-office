@@ -2,51 +2,37 @@ var got = require('got');
 // Get a list of all of the place names
 var API_KEY = require('./config.js');
 
-exports.getAllPlaceData = function() {
+var options = {
+    responseType: 'json'
+};
 
-    got(`http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=${API_KEY}`, options)
-        .then(response => {
-            var responseBody = response.body;
-            // console.log(responseBody);
-            var locationArray = responseBody.Locations.Location;
-            // Loop through and console.log responseBody.Locations.Location[i].name
+exports.getAllPlaceData = async function () {
 
-            // Ask user for input on what location they want to check
-            while (true) {
+    const response = await got(`http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=${API_KEY}`, options);
 
-                // Wait for user's response.
-                var choice = readlineSync.question('Enter a location: ');
-                // Check if inputted choice is valid
-                let choiceIsValid = false;
-                let locationId;
+    var responseBody = response.body;
 
-                // If we find the location name in the array, set choiceIsValid to true and save ID
+    var locationArray = responseBody.Locations.Location;
 
-                for (let i = 0; i < locationArray.length; i++) {
-                    if (locationArray[i].name == choice) {
-                        choiceIsValid = true;
-                        locationId = locationArray[i].id;
-                        break;
-                    }
-                }
+    // console.log("location array isssss:", locationArray[0]);
 
-
-                if (choiceIsValid) {
-                    handleChoice(choice, locationId);
-                    break;
-                }
-                console.log("Incorrect place name, please re-enter.");
-            }
-
-
-            // Check it exists against our locationArray
-
-            // If no, ask them to re-enter
-
-            // If yes, save the corresponding ID and then make a GET request to that endpoint to print weather info
-
-
-        });
+    return locationArray;
 
 }
 
+// 
+exports.getNextForecast = async function (choice, locationId) {
+
+    let url = `http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/${locationId}?res=3hourly&key=${API_KEY}`;
+
+    const response = await got(url, options);
+
+    let locationInfo = response.body.SiteRep.DV.Location;
+    // console.log(locationInfo);
+
+    let nextForecast = locationInfo.Period[0].Rep[0];
+    
+    return nextForecast;
+
+
+}
