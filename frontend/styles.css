@@ -1,0 +1,25 @@
+body {
+    background-color: #cccccc;
+    text-align: center;
+}
+
+
+header {
+    color: white;
+    background-color: rgb(57, 57, 57);
+    width: 100%;
+    padding: 1rem;
+}
+
+h1 {
+    font-size: 5rem;
+    text-align: center;
+}
+
+.form-group {
+    padding-top: 10px;
+}
+
+input {
+    font-size: 1.2rem;
+}

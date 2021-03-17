@@ -20,8 +20,7 @@ exports.getAllPlaceData = async function () {
 
 }
 
-// 
-exports.getNextForecast = async function (choice, locationId) {
+exports.getNextForecast = async function (locationId) {
 
     let url = `http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/${locationId}?res=3hourly&key=${API_KEY}`;
 
@@ -33,6 +32,4 @@ exports.getNextForecast = async function (choice, locationId) {
     let nextForecast = locationInfo.Period[0].Rep[0];
     
     return nextForecast;
-
-
 }
