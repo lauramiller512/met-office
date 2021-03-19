@@ -32,7 +32,6 @@ async function submitLocation(){
                             <p>Chance of rain is <b>${responseJson["Pp"]}%</b></p>
                             `
     textInput.value = "";
-
 }
 
 function parseWeatherType(number) {
