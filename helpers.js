@@ -1,3 +1,12 @@
+exports.requestLocationFromUser = function () {
+
+    // Wait for user's response.
+    var choice = readlineSync.question('Enter a location: ');
+    // Check if inputted choice is valid
+
+    return choice;
+};
+
 exports.checkLocationValidity = function (choice, locationArray) {
     // If we find the location name in the array, set choiceIsValid to true and save ID
     for (let i = 0; i < locationArray.length; i++) {

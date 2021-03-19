@@ -1,23 +1,14 @@
 
 let textInput = document.getElementById('locationInput');
 
-// let userInputtedLocation = "";
-
-// textInput.addEventListener("input", ()=>{
-//     userInputtedLocation = input.value;
-// });
-
 let submitBtn = document.getElementById('submitBtn');
 
 submitBtn.addEventListener("click", ()=>{
-    console.log('submitted!!!!!!');
     submitLocation();
 });
 
 async function submitLocation(){
     
-
-    // Get what the user has entered from the input
     let location = document.getElementById('locationInput').value;
     console.log(location);
 
@@ -40,7 +31,6 @@ async function submitLocation(){
                             <p>Wind speed is <b>${responseJson["S"]} mph</b></p>
                             <p>Chance of rain is <b>${responseJson["Pp"]}%</b></p>
                             `
- 
     textInput.value = "";
 
 }

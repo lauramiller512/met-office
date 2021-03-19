@@ -8,8 +8,6 @@ const getNextForecast = apiFuncs.getNextForecast;
 
 var helperFuncs = require('./helpers.js');
 const checkLocationValidity = helperFuncs.checkLocationValidity;
-const printWeatherData = helperFuncs.printWeatherData;
-
 
 app.use(express.static('frontend'));
 
@@ -20,12 +18,6 @@ app.get(`/forecast/location=:location`, async (req, res) => {
 
     // Get ID of the location
     let locationArray = await getAllPlaceData();
-
-
-    // {
-    //     isValid: true,
-    //     id: locationId
-    // }
     
     // Look up and return next forecast
     try {
@@ -36,8 +28,6 @@ app.get(`/forecast/location=:location`, async (req, res) => {
         }
         let forecast = await getNextForecast(validity.id);
         console.log(location);
-        console.log(forecast);
-        console.log("!!!!!!!");
         res.send(forecast);
 
     } catch (error) {
@@ -46,12 +36,6 @@ app.get(`/forecast/location=:location`, async (req, res) => {
         console.log("We threw an error!");
         res.send("Error");
     }
-
-})
-
-
-app.get('/hello', (req, res) => {
-    res.send('Hellooooooooooo World!')
 })
 
 app.listen(port, () => {
