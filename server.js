@@ -11,6 +11,21 @@ const checkLocationValidity = helperFuncs.checkLocationValidity;
 
 app.use(express.static('frontend'));
 
+app.get(`/getAllLocations`, async (req, res) => {
+    let locationArray = await getAllPlaceData();
+    
+    let locationNameArray = [];
+
+    locationArray.forEach(location => {
+        locationNameArray.push(location.name);
+    });
+
+    locationNameArray.sort();
+
+    res.send(locationNameArray);
+
+});
+
 // location = location name as string
 app.get(`/forecast/location=:location`, async (req, res) => {
 

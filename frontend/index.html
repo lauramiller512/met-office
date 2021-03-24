@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>Weather forecast</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -13,13 +13,18 @@
   <header>
     <h1>☁️ Find a Forecast ☁️</h1>
   </header>
-  
+
   <div class="container">
     <div class="form-group">
 
       <h2>Enter a location:</h2>
       <br>
-      <input type="text" name="location" id="locationInput">
+      <input list="location-options" type="text" name="location" id="locationInput" autocomplete="off">
+
+      <datalist id="location-options">
+      </datalist>
+
+
       <button type="submit" value="Submit" id="submitBtn" class="btn btn-dark">
         Submit
       </button>

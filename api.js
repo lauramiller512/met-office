@@ -9,6 +9,7 @@ exports.getAllPlaceData = async function () {
 
     const response = await got(`http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/sitelist?key=${API_KEY}`, options);
     var locationArray = response.body.Locations.Location;
+    // console.log(locationArray[0]);
     return locationArray;
 
 }

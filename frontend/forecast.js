@@ -1,16 +1,52 @@
-
 let textInput = document.getElementById('locationInput');
 
 let submitBtn = document.getElementById('submitBtn');
 
-submitBtn.addEventListener("click", ()=>{
+submitBtn.addEventListener("click", () => {
     submitLocation();
 });
 
-async function submitLocation(){
-    
+let locationNameArray;
+
+async function populateLocationDropdown() {
+
+    // fetch request to our api (getallplacedata) to get the list of locations
+    let response = await fetch(`http://localhost:3000/getAllLocations`);
+    console.log(response);
+    locationNameArray = await response.json();
+
+    // use that list to populate datalist location-option
+
+    var options = '';
+
+    for (var i = 0; i < locationNameArray.length; i++) {
+        options += '<option value="' + locationNameArray[i] + '" />';
+    }
+
+    document.getElementById('location-options').innerHTML = options;
+
+
+    // loop where we add <option> ${arrayitem.name} </option>
+
+}
+
+populateLocationDropdown();
+
+
+async function submitLocation() {
+
     let location = document.getElementById('locationInput').value;
     console.log(location);
+
+    // Replace the text on the screen with the response data
+    let resultsDiv = document.getElementById('results');
+
+    // Check if location is in the array of all names
+    if (!locationNameArray.includes(location)){
+        resultsDiv.innerHTML = `<h2>Invalid location - please select from drop-down list</h2>`;
+        return;
+        // return out of the function
+    }
 
     // Do a get request to our endpoint 
     let response = await fetch(`http://localhost:3000/forecast/location=${location}`);
@@ -18,8 +54,6 @@ async function submitLocation(){
     let responseJson = await response.json();
     console.log(responseJson);
 
-    // Replace the text on the screen with the response data
-    let resultsDiv = document.getElementById('results');
 
     let weatherStr = parseWeatherType(responseJson["W"]);
     let temp = responseJson["T"];
