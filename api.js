@@ -21,3 +21,11 @@ exports.getNextForecast = async function (locationId) {
     let nextForecast = response.body.SiteRep.DV.Location.Period[0].Rep[0];
     return nextForecast;
 }
+
+exports.getFiveDayForecast = async function (locationId) {
+    let url = `http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/${locationId}?res=daily&key=${API_KEY}`;
+    const response = await got(url, options);
+    let fiveDayForecast = response.body.SiteRep.DV.Location.Period;
+    console.log(fiveDayForecast);
+    return fiveDayForecast;
+}

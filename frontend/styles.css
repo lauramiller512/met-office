@@ -1,12 +1,12 @@
 body {
-    background-color: #cccccc;
+    background-color: #b7c5ca;
     text-align: center;
 }
 
 
 header {
     color: white;
-    background-color: rgb(57, 57, 57);
+    background-color: rgb(118, 134, 165);
     width: 100%;
     padding: 1rem;
 }
@@ -22,4 +22,13 @@ h1 {
 
 input {
     font-size: 1.2rem;
+}
+
+input:invalid {
+    border: 1px solid red;
+}
+
+#results {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
